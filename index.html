@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <table class="tablaContenedora">
+        <tr>
+            <td style="width:20%"></td>
+            <td class="tdFactura" style="width:60%" align="center">
+                <table>
+                    <tr><td align="center"><h4 style="margin:0px">FACTURA</h4></td></tr>
+                    <tr><td align="center" id="idFactura">Nro: </td></tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table class="tablaContenedora">
+                    <tr>
+                        <td id="nombreCliente" colspan="1" style="width:20%">Cliente:</td>
+                        <td class="lugarCliente"></td>
+                    </tr>
+                </table>
+                <table class="tablaContenedora">
+                    <tr>
+                        <td id="documentoCliente" style="width:9%">Documento:</td>
+                        <td class="lugarDocumentDate"></td>
+                        
+                    </tr>
+                    <tr>
+                        <td id="inputFecha" style="width:9%">Fecha:</td>
+                        <td class="lugarDocumentDate"></td>
+                    </tr>
+                </table>
+            </td>
+            <td></td>
+        </tr>
+        <tr><td colspan="3" height="30"></td></tr>
+        <tr>
+            <td colspan="3">
+                <table class="border tablaContenedora">
+                    <thead>
+                        <tr class="itemsTabla">
+                            <th id="idNombreProduc">Descripcion</th>
+                            <th id="idCantidadProd">Cantidad</th>
+                            <th id="idPrecio">Valor Unitario</th>
+                            <th id="idSubtotal">SubTotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="total"></div>
+    <input class="inputPrueba" type="text">
+    <div class="textoInputPrueba"></div>
+    <button id="btnDescargar">DESCARGAR</button>
+</body>
+<script src="./script.js"></script>
+</html>

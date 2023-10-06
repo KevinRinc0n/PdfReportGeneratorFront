@@ -1,0 +1,26 @@
+.tablaContenedora
+{
+    width: 100%;
+}
+
+.tdFactura
+{
+    width: 60%;
+}
+
+.lugarCliente
+{
+    width: 80%;
+    border-bottom:1px solid black;
+}
+
+.lugarDocumentDate
+{
+    width: 35%;
+    border-bottom:1px solid black;
+}
+
+.itemsTabla
+{
+    background-color: #D8D8D8;
+}

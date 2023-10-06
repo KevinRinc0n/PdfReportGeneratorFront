@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital@1&family=Roboto&display=swap');
+
+*
+{
+  font-family: 'Poppins', sans-serif;
+}
+
+.prodcuto
+{
+  display: flex;
+  justify-content: center;
+  margin-top: 8%;
+  margin-bottom: 8%;
+}
+
+.total
+{
+  margin-left: 80%;
+}
