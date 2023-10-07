@@ -54,8 +54,9 @@ async function cargarClientesYCategorias() {
 }
 
 async function productosXCategoria(categoriaId) {
-    const respuesta = await fetch(`http://localhost:5191/Tienda/Producto?IdCategoriaFk=${categoriaId}`); 
+    const respuesta = await fetch(`http://localhost:5191/Tienda/Producto/ProductoIdCategoriaFk/${categoriaId}`);
     const productos = await respuesta.json();
+    console.log(productos);
     mostrarProductosAceptar(productos);
 }
 
@@ -73,7 +74,7 @@ function mostrarProductosAceptar(productos) {
             <th scope="row">${producto.nombre}</th>
             <td>${producto.precio}</td>
             <td>${producto.stock}</td>
-            <td>${producto.categoria.nombre}</td>
+            
             <td><button type="button" class="btn btn-warning agregarBtn" data-producto-id="${producto.id}">Agregar</button></td>
         </tr>
         `;
@@ -103,7 +104,7 @@ function mostrarProductos(productos) {
             <th scope="row">${producto.nombre}</th>
             <td>${producto.precio}</td>
             <td>${producto.stock}</td>
-            <td>${producto.categoria.nombre}</td>
+            
             <td>${subtotal}</td>
         </tr>
         `;
@@ -118,9 +119,5 @@ confirmarCompra.addEventListener("click", () => {
     btnDescargar.style.display = "flex";
 });
 
-selectCategoria.addEventListener("change", () => {
-    const categoriaId = selectCategoria.value;
-    productosXCategoria(categoriaId);
-});
 
 cargarClientesYCategorias();
