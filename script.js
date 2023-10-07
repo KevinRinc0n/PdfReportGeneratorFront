@@ -29,6 +29,7 @@ const contenedorProductosParaAceptar = document.getElementById("tableProducAcept
 const btnDescargar = document.getElementById("descargar");
 const total = document.getElementById("total");
 const botonAgregar = document.getElementById("agregarBtn");
+let productosSeleccionados = [];
 
 async function cargarClientesYCategorias() {
     const respuestaCliente = await fetch("http://localhost:5191/Tienda/Cliente"); 
@@ -63,6 +64,7 @@ selectCategoria.addEventListener("change", () => {
     productosXCategoria(categoriaId);
 });
 
+
 function mostrarProductosAceptar(productos) {
     let listar = "";
     productos.forEach((producto) => {
@@ -70,8 +72,8 @@ function mostrarProductosAceptar(productos) {
         <tr>
             <th scope="row">${producto.nombre}</th>
             <td>${producto.precio}</td>
-            <td>${producto.cantidad}</td>
-            <td>${producto.idCategoriaFk}</td>
+            <td>${producto.stock}</td>
+            <td>${producto.categoria.nombre}</td>
             <td><button type="button" class="btn btn-warning agregarBtn" data-producto-id="${producto.id}">Agregar</button></td>
         </tr>
         `;
@@ -82,32 +84,32 @@ function mostrarProductosAceptar(productos) {
     botonesAgregar.forEach((boton) => {
         boton.addEventListener("click", (e) => {
             const productoId = e.target.dataset.productoId;
-            mostrarProductos(productoId);
+            const productoSeleccionado = productos.find(producto => producto.id === parseInt(productoId));
+            productosSeleccionados.push(productoSeleccionado); 
+            mostrarProductos(productosSeleccionados); 
         });
     });
 }
 
-let valorTotal = 0; 
-
 function mostrarProductos(productos) {
     let listar = "";
-    valorTotal = 0; 
+    valorTotal = 0;
 
     productos.forEach((producto) => {
-        const subtotal = producto.precio * producto.cantidad;
-        valorTotal += subtotal; 
+        const subtotal = producto.precio * producto.stock;
+        valorTotal += subtotal;
         listar += `
         <tr>
             <th scope="row">${producto.nombre}</th>
             <td>${producto.precio}</td>
-            <td>${producto.cantidad}</td>
-            <td>${producto.idCategoriaFk}</td>
+            <td>${producto.stock}</td>
+            <td>${producto.categoria.nombre}</td>
             <td>${subtotal}</td>
         </tr>
         `;
     });
     contenedorProductos.innerHTML = listar;
-    
+
     total.textContent = valorTotal;
 }
 
@@ -116,4 +118,9 @@ confirmarCompra.addEventListener("click", () => {
     btnDescargar.style.display = "flex";
 });
 
-cargarClientesYCategorias(); 
+selectCategoria.addEventListener("change", () => {
+    const categoriaId = selectCategoria.value;
+    productosXCategoria(categoriaId);
+});
+
+cargarClientesYCategorias();
