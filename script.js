@@ -58,6 +58,11 @@ async function productosXCategoria(categoriaId) {
     mostrarProductosAceptar(productos);
 }
 
+selectCategoria.addEventListener("change", () => {
+    const categoriaId = selectCategoria.value;
+    productosXCategoria(categoriaId);
+});
+
 function mostrarProductosAceptar(productos) {
     let listar = "";
     productos.forEach((producto) => {
@@ -67,39 +72,44 @@ function mostrarProductosAceptar(productos) {
             <td>${producto.precio}</td>
             <td>${producto.cantidad}</td>
             <td>${producto.idCategoriaFk}</td>
-            <td><button type="button" class="btn btn-warning" id="agregarBtn">Agregar</button></td>
+            <td><button type="button" class="btn btn-warning agregarBtn" data-producto-id="${producto.id}">Agregar</button></td>
         </tr>
         `;
     });
     contenedorProductosParaAceptar.innerHTML = listar;
+
+    const botonesAgregar = document.querySelectorAll(".agregarBtn");
+    botonesAgregar.forEach((boton) => {
+        boton.addEventListener("click", (e) => {
+            const productoId = e.target.dataset.productoId;
+            mostrarProductos(productoId);
+        });
+    });
 }
+
+let valorTotal = 0; 
 
 function mostrarProductos(productos) {
     let listar = "";
+    valorTotal = 0; 
+
     productos.forEach((producto) => {
+        const subtotal = producto.precio * producto.cantidad;
+        valorTotal += subtotal; 
         listar += `
         <tr>
             <th scope="row">${producto.nombre}</th>
             <td>${producto.precio}</td>
             <td>${producto.cantidad}</td>
             <td>${producto.idCategoriaFk}</td>
-            <td>${producto.precio * producto.cantidad}</td>
+            <td>${subtotal}</td>
         </tr>
         `;
     });
     contenedorProductos.innerHTML = listar;
+    
+    total.textContent = valorTotal;
 }
-
-// botonAgregar.addEventListener("click", () =>{
-//     mostrarProductos(producto.id);
-// });
-
-// total = //falta hacer
-
-selectCategoria.addEventListener("change", () => {
-    const categoriaId = selectCategoria.value;
-    productosXCategoria(categoriaId);
-});
 
 const confirmarCompra = document.getElementById("compraConfirm");
 confirmarCompra.addEventListener("click", () => {
